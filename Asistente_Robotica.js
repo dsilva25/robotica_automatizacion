@@ -28,8 +28,8 @@ function respTextToSpeech(text) {
             }
             console.log(`Audio content written to file: ${outputFile}`);
             player.play(outputFile, function(err){
-              if (err) throw err
-            }) 
+                if (err) throw err
+            })              
         });
     });
 }
@@ -72,6 +72,8 @@ function streamingMicRecognize(encoding, sampleRateHertz, languageCode) {
   // Creates a client
   const client = new speech.SpeechClient();
 
+  const accuweather = require('node-accuweather')()(API_KEY);
+
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -94,8 +96,15 @@ function streamingMicRecognize(encoding, sampleRateHertz, languageCode) {
     .on('error', console.error)
     .on('data', data => {
       const transcripcion = data.results[0].alternatives[0].transcript;
-      if (transcripcion.includes('hora')) {
-        respTextToSpeech('La hora es: 17:04');
+      if ((transcripcion.includes('qué') || transcripcion.includes('dime')) && transcripcion.includes('hora')) {
+        const date = new Date();
+        respTextToSpeech(`La hora es: ${date.getHours()}:${date.getMinutes()}`);
+      } else if (transcripcion.includes('temperatura')) {
+        accuweather.getCurrentConditions("Santiago", {unit: "Celsius"})
+        .then(function(result) {
+            console.log(result);
+            respTextToSpeech(`La temperatura es: ${result.Temperature} Grados. Pero se siente como: ${result.RealFeel} Grados`);
+        });
       }
 
       process.stdout.write(
