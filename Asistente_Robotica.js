@@ -3,6 +3,7 @@
 function respTextToSpeech(text) {
     const textToSpeech = require('@google-cloud/text-to-speech');
     const fs = require('fs');
+    const player = require('play-sound')();
 
     const client = new textToSpeech.TextToSpeechClient();
 
@@ -26,6 +27,9 @@ function respTextToSpeech(text) {
             return;
             }
             console.log(`Audio content written to file: ${outputFile}`);
+            player.play(outputFile, function(err){
+              if (err) throw err
+            }) 
         });
     });
 }
