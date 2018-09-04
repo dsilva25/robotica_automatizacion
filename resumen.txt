@@ -1,0 +1,11 @@
+# Instalar paquetes de Python
+    
+    pip install pyaudio python-crontab
+
+# Instalar paquetes de Node
+    
+    node install
+
+# Eliminar crontab de sistema operativo
+    
+    crontab -r

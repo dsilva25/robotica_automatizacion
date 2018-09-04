@@ -10,11 +10,15 @@ let nombre = '';
 let medicamentos = [
   {
     nombre: 'Paracetamol',
-    hora: '17:49'
+    hora: '23:37'
   },
   {
     nombre: 'Ibuprofeno',
-    hora: '10:00'
+    hora: '23:38'
+  },
+  {
+    nombre: 'Nope',
+    hora: '23:44'
   }
 ];
 
@@ -26,7 +30,6 @@ function getRequest(url) {
     }
     requestHttp(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body);
             body = JSON.parse(body);
             const tmpNombre = body.nombre.split(" ");
             nombre = tmpNombre[2];
