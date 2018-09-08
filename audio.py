@@ -12,10 +12,10 @@ import subprocess
 from crontab import CronTab
 
 # Ruta a Script de medicamento
-RUTA_MEDICAMENTO = "/home/fransafu/fransafuLab/robotica_automatizacion"
+RUTA_MEDICAMENTO = "/home/pi/robotica_automatizacion"
 
 # Every minute
-cron = CronTab(user='fransafu')
+cron = CronTab(user='pi')
 job = cron.new(command='cd ' + RUTA_MEDICAMENTO + ' && node ' + RUTA_MEDICAMENTO + '/medicamentos.js')
 job.run()
 job.minute.every(1)
