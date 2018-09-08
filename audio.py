@@ -1,11 +1,7 @@
-""" Record a few seconds of audio and save to a WAVE file. """
-
 import pyaudio
 import wave
 import sys
 import getch
-
-# 
 import subprocess
 
 # Ruta a Script de medicamento
