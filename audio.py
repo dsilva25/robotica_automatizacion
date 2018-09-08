@@ -8,18 +8,8 @@ import getch
 # 
 import subprocess
 
-# CronTab
-from crontab import CronTab
-
 # Ruta a Script de medicamento
 RUTA_MEDICAMENTO = "/home/pi/robotica_automatizacion"
-
-# Every minute
-cron = CronTab(user='pi')
-job = cron.new(command='cd ' + RUTA_MEDICAMENTO + ' && node ' + RUTA_MEDICAMENTO + '/medicamentos.js')
-job.run()
-job.minute.every(1)
-cron.write()
 
 # Variables de audio
 chunk = 1024
