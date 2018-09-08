@@ -1,7 +1,6 @@
 import pyaudio
 import wave
 import sys
-import getch
 import subprocess
 
 # Ruta a Script de medicamento
@@ -18,9 +17,9 @@ WAVE_OUTPUT_FILENAME = "audio.raw"
 p = pyaudio.PyAudio()
 
 while True:
-	tecla = getch.getche()
+	tecla = raw_input("\nPresione enter para grabar.")
 
-	if tecla == 'r':
+	if tecla == '':
 		stream = p.open(format = FORMAT,
 						channels = CHANNELS,
 						rate = RATE,
@@ -48,7 +47,7 @@ while True:
 		# Call command node speech-to-text.js
 		subprocess.call(['node', 'speech-to-text.js'])
 	else:
-		print("Presionar la tecla 'r' para grabar")
+		print("Presionar enter para grabar")
 
 p.terminate()
 
