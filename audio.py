@@ -23,6 +23,7 @@ while True:
 		stream = p.open(format = FORMAT,
 						channels = CHANNELS,
 						rate = RATE,
+						input_device_index = 2,
 						input = True,
 						frames_per_buffer = chunk)
 
