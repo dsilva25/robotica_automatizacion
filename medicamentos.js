@@ -22,6 +22,17 @@ let medicamentos = [
   }
 ];
 
+function main() {
+    while(true) {
+        const date = new Date();
+        medicamentos.forEach(element => {
+            if (element.hora == `${date.getHours()}:${date.getMinutes()}`) {
+                getRequest(`https://api.rutify.cl/rut/${rut}`);
+            }
+        });
+    }
+}
+
 function getRequest(url) {
     const options = {
         url: url,
@@ -50,6 +61,7 @@ function respTextToSpeech(text) {
     const textToSpeech = require('@google-cloud/text-to-speech');
     const fs = require('fs');
     let player = require('play-sound')();
+    const cmd=require('node-cmd');
   
     const client = new textToSpeech.TextToSpeechClient();
   
@@ -73,11 +85,15 @@ function respTextToSpeech(text) {
           return;
           }
           console.log(`Audio content written to file: ${outputFile}`);
-          player.play(outputFile, function(err){
-              if (err) throw err
-          })              
+            cmd.get(
+                `mpg123 ${outputFile}`,
+                function(err, data, stderr) {
+                    if (err) throw err;
+                    console.log(data);
+            }
+            );             
       });
     });
 }
 
-getRequest(`https://api.rutify.cl/rut/${rut}`);
+main();
