@@ -22,8 +22,12 @@ let medicamentos = [
   }
 ];
 
-function main() {
+async function main() {
+    const delay = (time) => new Promise(reject => setTimeout(reject, time));
+
     while(true) {
+        await delay(50000);
+
         const date = new Date();
         medicamentos.forEach(element => {
             if (element.hora == `${date.getHours()}:${date.getMinutes()}`) {
