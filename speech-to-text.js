@@ -47,9 +47,9 @@ client
         let transcription = response.results
             .map(result => result.alternatives[0].transcript)
             .join('\n');
-        console.log(`Transcription: ${transcription}`);
         transcription = transcription.toLowerCase();
         transcription = transcription.replace("é", "e");
+        console.log(`Transcription: ${transcription}`);
         handleResponse(transcription);
     })
     .catch(err => {
@@ -75,7 +75,7 @@ function handleResponse(transcripcion) {
     // Esto obtiene la transcripcion desde el servidor
     try {
         // Flujo
-        if ((transcripcion.includes('qué') || transcripcion.includes('dime')) && transcripcion.includes('hora')) {
+        if ((transcripcion.includes('que') || transcripcion.includes('dime')) && transcripcion.includes('hora')) {
             const date = new Date();
             respTextToSpeech(`${nombre}, la hora es: ${date.getHours()}:${date.getMinutes()}`);
         } else if (transcripcion.includes('temperatura')) {
