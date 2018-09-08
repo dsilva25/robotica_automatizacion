@@ -124,6 +124,7 @@ function respTextToSpeech(text) {
             }
             console.log(`Audio content written to file: ${outputFile}`);
             player.play(outputFile, function (err) {
+                console.log(err);
                 if (err) throw err
             })
         });
