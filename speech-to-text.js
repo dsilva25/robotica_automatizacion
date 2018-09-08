@@ -48,6 +48,8 @@ client
             .map(result => result.alternatives[0].transcript)
             .join('\n');
         console.log(`Transcription: ${transcription}`);
+        transcription = transcription.toLowerCase();
+        transcription = transcription.replace("é", "e");
         handleResponse(transcription);
     })
     .catch(err => {
