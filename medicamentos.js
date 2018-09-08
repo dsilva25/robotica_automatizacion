@@ -11,17 +11,26 @@ let nombre = '';
 let medicamentos = [
   {
     nombre: 'Paracetamol',
-    hora: '18:59'
+    hora: '19:12'
   },
   {
     nombre: 'Ibuprofeno',
-    hora: '19:00'
+    hora: '19:13'
   },
   {
     nombre: 'Nope',
-    hora: '19:01'
+    hora: '19:14'
   }
 ];
+
+function main() {
+    const date = new Date();
+    medicamentos.forEach(element => {
+        if (element.hora == `${date.getHours()}:${date.getMinutes()}`) {
+            getRequest(`https://api.rutify.cl/rut/${rut}`);
+        }
+    });
+}
 
 function getRequest(url) {
     const options = {
@@ -87,5 +96,5 @@ function respTextToSpeech(text) {
 }
 
 cron.schedule('*/1 * * * *', function(){
-    getRequest(`https://api.rutify.cl/rut/${rut}`);
+    main();
 });
