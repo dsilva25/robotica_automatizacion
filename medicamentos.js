@@ -1,4 +1,5 @@
 const requestHttp = require('request');
+var cron = require('node-cron');
   
 const headers = {
   'User-Agent': 'Super Agent/0.0.1',
@@ -10,32 +11,17 @@ let nombre = '';
 let medicamentos = [
   {
     nombre: 'Paracetamol',
-    hora: '23:37'
+    hora: '18:59'
   },
   {
     nombre: 'Ibuprofeno',
-    hora: '23:38'
+    hora: '19:00'
   },
   {
     nombre: 'Nope',
-    hora: '23:44'
+    hora: '19:01'
   }
 ];
-
-async function main() {
-    const delay = (time) => new Promise(reject => setTimeout(reject, time));
-
-    while(true) {
-        await delay(50000);
-
-        const date = new Date();
-        medicamentos.forEach(element => {
-            if (element.hora == `${date.getHours()}:${date.getMinutes()}`) {
-                getRequest(`https://api.rutify.cl/rut/${rut}`);
-            }
-        });
-    }
-}
 
 function getRequest(url) {
     const options = {
@@ -100,4 +86,6 @@ function respTextToSpeech(text) {
     });
 }
 
-main();
+cron.schedule('*/1 * * * *', function(){
+    getRequest(`https://api.rutify.cl/rut/${rut}`);
+});
